@@ -48,32 +48,3 @@ sns.regplot(x=protected_areas, y=gdp_percap, line_kws={'color': 'red'})
 plt.xlabel('Share of Terrestrial and Marine Protected Areas (of Total Land Area) in %')
 plt.ylabel('GDP per Capita in US$')
 plt.show()
-
-# CO2 emission groups
-x = range(len(data_clean['Terciles CO2 Emissions'].unique()))
-bar_width = 0.35
-
-low_co2_forest = data_clean[data_clean['Terciles CO2 Emissions'] == 'Lowest 30% of CO2 Emissions']['forest']
-mid_co2_forest = data_clean[data_clean['Terciles CO2 Emissions'] == 'Middle 30% of CO2 Emissions']['forest']
-high_co2_forest = data_clean[data_clean['Terciles CO2 Emissions'] == 'Highest 30% of CO2 Emissions']['forest']
-
-low_co2_protected = data_clean[data_clean['Terciles CO2 Emissions'] == 'Lowest 30% of CO2 Emissions']['protected_areas']
-mid_co2_protected = data_clean[data_clean['Terciles CO2 Emissions'] == 'Middle 30% of CO2 Emissions']['protected_areas']
-high_co2_protected = data_clean[data_clean['Terciles CO2 Emissions'] == 'Highest 30% of CO2 Emissions']['protected_areas']
-
-plt.figure(figsize=(10, 6))
-
-plt.bar([i - bar_width for i in x], low_co2_forest, width=bar_width, label='Low Emissions')
-plt.bar([i - bar_width for i in x], mid_co2_forest, width=bar_width, bottom=low_co2_forest, label='Medium Emissions')
-plt.bar([i - bar_width for i in x], high_co2_forest, width=bar_width, bottom=low_co2_forest + mid_co2_forest, label='High Emissions')
-
-plt.bar([i + bar_width for i in x], low_co2_protected, width=bar_width, label='Low Emissions')
-plt.bar([i + bar_width for i in x], mid_co2_protected, width=bar_width, bottom=low_co2_protected, label='Medium Emissions')
-plt.bar([i + bar_width for i in x], high_co2_protected, width=bar_width, bottom=low_co2_protected + mid_co2_protected, label='High Emissions')
-
-plt.xlabel('CO2 Emissions')
-plt.ylabel('Values')
-plt.xticks(x, data_clean['Terciles CO2 Emissions'].unique())
-plt.legend()
-plt.tight_layout()
-plt.show()
